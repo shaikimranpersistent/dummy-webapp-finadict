@@ -9,6 +9,8 @@ FROM base AS middle
 RUN git clone https://github.com/shaikimranpersistent/dummy-webapp-finadict.git
 WORKDIR /root/notebooks/finadict
 RUN pip3 install -r requirements.txt
+COPY setup.sh /tmp/setup.sh
+RUN /tmp/setup.sh
 
 FROM middle AS app
 
