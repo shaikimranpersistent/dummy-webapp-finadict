@@ -1,4 +1,4 @@
-FROM python as base
+FROM subhayu99/fbprophet as base
 
 LABEL maintainer="Shaik Imran"
 RUN git clone https://github.com/shaikimranpersistent/dummy-webapp-finadict.git
