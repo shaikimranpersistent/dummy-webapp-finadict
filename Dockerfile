@@ -1,16 +1,19 @@
-FROM subhayu99/fbprophet AS base
+FROM python as base
+
+RUN apt update
+RUN apt upgrade -y
+RUN rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade setuptools, cython, numpy, matplotlib
 
 LABEL maintainer="Shaik Imran"
-RUN sudo apt update
-RUN sudo apt upgrade -y
 
 FROM base AS middle
 
 RUN git clone https://github.com/shaikimranpersistent/dummy-webapp-finadict.git
-WORKDIR /root/notebooks/finadict
-RUN pip3 install -r requirements.txt
-COPY setup.sh /tmp/setup.sh
-RUN /tmp/setup.sh
+WORKDIR ./dummy-webapp-finadict
+RUN ls -a
+RUN pip install -r ./requirements.txt
+RUN pip install --only-binary pystan==2.19.1.1
 
 FROM middle AS app
 
